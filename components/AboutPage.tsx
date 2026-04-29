@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   MapPin, Phone, Mail, Leaf, MessageCircle, Rocket, 
   Hourglass, Tag, ChevronUp 
@@ -20,12 +21,12 @@ const AboutPage = () => {
   });
 
   const ecosystemItems = [
-    { icon: <Leaf size={20} />, title: "Entry Points", desc: "MindDhara brings together students, clinicians, and families.", angle: -90, isLight: true },
-    { icon: <MessageCircle size={20} />, title: "Transformation & Evolution", desc: "Everyone evolves here. Students become professionals.", angle: -30 },
-    { icon: <MapPin size={20} />, title: "Knowledge & Data Flow", desc: "Knowledge flows both ways between therapy and research.", angle: 30 },
-    { icon: <Rocket size={20} />, title: "Core Subsystems", desc: "Forward, Couch, and ATLAS connect care and innovation.", angle: 90, isLight: true },
-    { icon: <Hourglass size={20} />, title: "A continuous cycle", desc: "Growth doesn't stop. Researchers mentor the next generation.", angle: 150 },
-    { icon: <Tag size={20} />, title: "Why it matters", desc: "We're improving how mental health care works globally.", angle: 210 },
+    { id: 1, icon: <Leaf size={24} />, title: 'Entry Points', desc: 'MindDhara brings together students, clinicians, and families to share real experiences that shape better care.', angle: -90, isLight: true },
+    { id: 2, icon: <MessageCircle size={24} />, title: 'Transformation & Evolution', desc: 'Everyone evolves here. Students become professionals, clinicians deepen their work, and patients become active partners.', angle: -30 },
+    { id: 3, icon: <MapPin size={24} />, title: 'Knowledge & Data Flow', desc: 'Knowledge flows both ways. What happens in therapy informs research, and research improves therapy.', angle: 30 },
+    { id: 4, icon: <Rocket size={24} />, title: 'Core Subsystems', desc: 'Three interconnected engines: Forward, Couch, and ATLAS. Together, they connect learning, care, and innovation.', angle: 90, isLight: true },
+    { id: 5, icon: <Hourglass size={24} />, title: 'A continuous cycle', desc: 'Growth does not stop. Students become clinicians, clinicians become researchers, and researchers mentor the next generation.', angle: 150 },
+    { id: 6, icon: <Tag size={24} />, title: 'Why it matters', desc: 'We are not just helping individuals—we are improving how mental health care works globally for everyone.', angle: 210 },
   ];
 
   // Scroll to top function
@@ -76,7 +77,7 @@ const AboutPage = () => {
               </div>
               <div className="mt-8 flex flex-col items-start gap-2">
                 <p className="font-semibold text-sm">Shreeja Reddy (GMBPsS, BCBA, RBT) & Team MindDhara</p>
-                <img src="https://minddhara.com/wp-content/uploads/2026/04/shreeja-sign.png" alt="Signature" className="h-12 invert opacity-90" />
+                <img src="/shreeja-sign.png" alt="Signature" className="h-12 invert opacity-90" />
               </div>
             </div>
           </div>
@@ -93,7 +94,7 @@ const AboutPage = () => {
           {/* Directors */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-4xl mx-auto mb-20">
             <div className="flex flex-col items-center">
-              <img src="https://minddhara.com/wp-content/uploads/2026/04/shreeja-reddy-png-565x800.jpg" alt="Shreeja Reddy" className="w-64 h-80 object-cover mb-6 shadow-xl rounded-lg" />
+              <img src="/shreeja.jpeg" alt="Shreeja Reddy" className="w-64 h-80 object-cover mb-6 shadow-xl rounded-lg" />
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Shreeja Reddy</h3>
               <p className="text-gray-800 font-medium text-sm mb-4 max-w-xs">(GMBPsS, BCBA, RBT), Neuropsychology Practitioner, Researcher Founder, Director</p>
               <p className="text-gray-500 text-sm mb-4 max-w-sm">Neuropsychology practitioner and founder building MindDhara...</p>
@@ -138,46 +139,90 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* 3. REGENERATIVE ECOSYSTEM (INTERACTIVE CIRCLE) */}
-      <section className="py-24 bg-white overflow-hidden">
+      {/* Updated Section 3: Regenerative Ecosystem */}
+      <section className="py-24 bg-white overflow-hidden flex flex-col items-center">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-28 text-gray-900">
-            MindDhara' s Regenerative Ecosystem
-          </h2>
-          
-          <div className="relative w-[320px] h-[320px] md:w-[450px] md:h-[450px] mx-auto border-4 border-[#1A411D] rounded-full flex items-center justify-center mb-16">
-            
-            {/* Center Dynamic Text */}
-            <div className="w-[75%] text-center z-10">
-              <h4 className="text-xl md:text-2xl font-bold text-gray-800 mb-3">{activeItem.title}</h4>
-              <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                {activeItem.desc}
-              </p>
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-3xl lg:text-4xl font-bold mb-28 text-gray-900"
+          >
+            MindDhara's Regenerative Ecosystem
+          </motion.h2>
+
+          <div className="relative w-[320px] h-[320px] md:w-[500px] md:h-[500px] mx-auto border-4 border-[#1A411D]/20 rounded-full flex items-center justify-center">
+            <div className="w-[70%] text-center z-10 px-4">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeItem.title}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h4 className="text-xl md:text-2xl font-bold text-[#1A411D] mb-3">
+                    {activeItem.title}
+                  </h4>
+                  <p className="text-sm md:text-base text-gray-600 leading-relaxed italic font-medium">
+                    "{activeItem.desc}"
+                  </p>
+                </motion.div>
+              </AnimatePresence>
             </div>
 
-            {/* Orbiting Bubbles */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
+              className="absolute inset-0 border-2 border-dashed border-[#1A411D]/10 rounded-full"
+            />
+
             {ecosystemItems.map((item, index) => {
-              const radius = typeof window !== 'undefined' && window.innerWidth < 768 ? 160 : 225;
+              const radius = typeof window !== 'undefined' && window.innerWidth < 768 ? 160 : 250;
               const x = Math.cos((item.angle * Math.PI) / 180) * radius;
               const y = Math.sin((item.angle * Math.PI) / 180) * radius;
 
               return (
-                <div
-                  key={index}
-                  className="absolute cursor-pointer transition-transform duration-300 hover:scale-105 z-20"
-                  style={{ transform: `translate(${x}px, ${y}px)` }}
-                  onMouseEnter={() => setActiveItem({ title: item.title, desc: item.desc })}
+                <motion.div
+                  key={item.id}
+                  initial={{ x: 0, y: 0, opacity: 0, scale: 0 }}
+                  whileInView={{
+                    x,
+                    y,
+                    opacity: 1,
+                    scale: 1,
+                    transition: {
+                      type: 'spring',
+                      stiffness: 60,
+                      damping: 12,
+                      delay: index * 0.15,
+                    },
+                  }}
+                  whileHover={{ scale: 1.15, zIndex: 50 }}
+                  className="absolute cursor-pointer"
+                  onMouseEnter={() =>
+                    setActiveItem({ title: item.title, desc: item.desc })
+                  }
                 >
-                  <div className={`
-                    w-24 h-24 md:w-[110px] md:h-[110px] rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.15)] flex flex-col items-center justify-center p-2 text-center border-[3px] border-white transition-all
-                    ${item.isLight ? 'bg-[#FDFAEE] text-[#1A411D]' : 'bg-[#1A411D] text-white hover:bg-[#255a29]'}
-                  `}>
-                    <div className="mb-1 opacity-90">{item.icon}</div>
-                    <span className="text-[10px] md:text-[11px] font-semibold leading-tight px-1">
+                  <div
+                    className={`w-24 h-24 md:w-32 md:h-32 rounded-full shadow-[0_15px_35px_rgba(0,0,0,0.15)] flex flex-col items-center justify-center p-3 text-center border-4 border-white transition-all duration-500 ${
+                      item.isLight
+                        ? 'bg-[#FDFAEE] text-[#1A411D]'
+                        : 'bg-[#1A411D] text-white'
+                    }`}
+                  >
+                    <motion.div
+                      initial={{ rotate: 0 }}
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                      className="mb-1"
+                    >
+                      {item.icon}
+                    </motion.div>
+                    <span className="text-[10px] md:text-[11px] font-bold uppercase leading-tight tracking-tighter">
                       {item.title}
                     </span>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -207,16 +252,15 @@ const AboutPage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {[
-              { img: "https://minddhara.com/wp-content/uploads/2025/10/Cultural.png", title: "Cultural", text: "Culturally grounded care that honours South Asian identities..." },
-              { img: "https://minddhara.com/wp-content/uploads/2025/10/Co-production.png", title: "Co-production", text: "Co-creating mental health and brain care with communities..." },
-              { img: "https://minddhara.com/wp-content/uploads/2025/10/Evidence-Innovation.png", title: "Evidence & Innovation", text: "Knowledge grows when it's connected to real life..." },
-              { img: "https://minddhara.com/wp-content/uploads/2025/10/Dignity-.png", title: "Dignity", text: "Every person's story matters shaping care that respects identity..." },
+              { img: "https://minddhara.com/wp-content/uploads/2025/10/Cultural.png", title: "Cultural", text: "Culturally grounded care that honours South Asian identities shaping mental health approaches that are relevant, respectful, and deeply rooted in lived experiences and community realities." },
+              { img: "https://minddhara.com/wp-content/uploads/2025/10/Co-production.png", title: "Co-production", text: "Co-creating mental health and brain care with communities ensuring lived experiences shape research, services, and solutions that are meaningful, inclusive, and collaborative." },
+              { img: "/img3.png", title: "Evidence & Innovation", text: "Knowledge grows when it’s connected to real life By combining research with lived experience, we create approaches that are thoughtful, adaptable, and meaningful where you are." },
+              { img: "https://minddhara.com/wp-content/uploads/2025/10/Dignity-.png", title: "Dignity", text: "Every person’s story matters shaping care that respects identity, values lived experience, and centres compassion, choice, and dignity within culturally informed mental health and brain care." },
             ].map((val, i) => (
               <div key={i} className="flex flex-col items-center group">
                 <img src={val.img} alt={val.title} className="w-48 h-48 rounded-full object-cover mb-6 shadow-xl transition-transform group-hover:scale-105" />
                 <h4 className="text-2xl font-semibold mb-3">{val.title}</h4>
                 <p className="text-sm text-gray-300 mb-4 px-2">{val.text}</p>
-                <button className="text-gray-400 font-medium text-[11px] tracking-widest hover:text-[#C6DC68] transition-colors uppercase">READ MORE</button>
               </div>
             ))}
           </div>
@@ -240,130 +284,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* 6. OUR VALUES BANNER */}
-      <section className="pt-16 pb-16 bg-[#FDFAEE] text-center relative z-10">
-        <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Values</h2>
-        <p className="text-xl font-bold text-gray-800 tracking-wide">
-          Cultural &nbsp;&middot;&nbsp; Co-Production &nbsp;&middot;&nbsp; Dignity &nbsp;&middot;&nbsp; Evidence & Innovation
-        </p>
-      </section>
-
-      {/* 7. FOOTER */}
-      <footer className="bg-[#1A411D] relative pt-12 pb-8">
-        <div className="container mx-auto px-6 lg:px-12 relative">
-          
-          {/* Newsletter & Socials Banner */}
-          <div className="bg-[#FDFAEE] rounded-xl p-10 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[0_10px_40px_rgba(0,0,0,0.15)] max-w-6xl mx-auto relative">
-            <div className="w-full lg:w-[40%]">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Stay Connected</h2>
-              <div className="flex gap-4">
-                <a href="#" className="bg-[#3b5998] text-white p-3 rounded-full hover:opacity-80 transition"><FacebookIcon /></a>
-                <a href="#" className="bg-[#262626] text-white p-3 rounded-full hover:opacity-80 transition"><InstagramIcon /></a>
-                <a href="#" className="bg-black text-white p-3 rounded-full hover:opacity-80 transition"><TwitterIcon /></a>
-                <a href="#" className="bg-[#0077b5] text-white p-3 rounded-full hover:opacity-80 transition"><LinkedinIcon /></a>
-                <a href="#" className="bg-[#cd201f] text-white p-3 rounded-full hover:opacity-80 transition"><YoutubeIcon /></a>
-              </div>
-            </div>
-            <div className="w-full lg:w-[60%]">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Sign Up For Our Newsletter</h2>
-              <form className="flex w-full shadow-sm rounded-md overflow-hidden">
-                <input 
-                  type="email" 
-                  placeholder="Your email address" 
-                  className="w-full px-5 py-4 border border-gray-200 focus:outline-none focus:bg-gray-50 text-gray-700"
-                />
-                <button type="submit" className="bg-[#2E6F34] text-white px-8 py-4 font-bold hover:bg-[#1A411D] transition flex-shrink-0 tracking-wide text-sm">
-                  SUBSCRIBE US
-                </button>
-              </form>
-            </div>
-          </div>
-
-          {/* Footer Links */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-white max-w-6xl mx-auto mt-20 mb-12">
-            <div>
-              <h3 className="text-2xl font-serif font-medium mb-8">Quick Links</h3>
-              <ul className="space-y-4 text-gray-200 text-sm">
-                <li><a href="#" className="hover:text-white transition">Home</a></li>
-                <li><a href="#" className="hover:text-white transition">About Us</a></li>
-                <li><a href="#" className="hover:text-white transition">Guru Library</a></li>
-                <li><a href="#" className="hover:text-white transition">Build With Us</a></li>
-                <li><a href="#" className="hover:text-white transition">Contact Us</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-2xl font-serif font-medium mb-8">Our Ecosystem</h3>
-              <ul className="space-y-4 text-gray-200 text-sm">
-                <li><a href="#" className="hover:text-white transition">MindDhara Forward</a></li>
-                <li><a href="#" className="hover:text-white transition">MindDhara Couch</a></li>
-                <li><a href="#" className="hover:text-white transition">MindDhara ATLAS</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-2xl font-serif font-medium mb-8">Information</h3>
-              <ul className="space-y-4 text-gray-200 text-sm">
-                <li><a href="#" className="hover:text-white transition">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition">Term and Conditions</a></li>
-                <li><a href="#" className="hover:text-white transition">Refund and Cancellation Policy</a></li>
-                <li><a href="#" className="hover:text-white transition">Shipping and Delivery</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-2xl font-serif font-medium mb-8">Contact Information</h3>
-              <div className="space-y-6 text-gray-200 text-sm">
-                
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center flex-shrink-0">
-                    <MapPin size={18} className="text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-white text-base">Office Address</h4>
-                    <p>Gurugram</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center flex-shrink-0">
-                    <Phone size={18} className="text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-white text-base">Mobile Number</h4>
-                    <p>+91-9821113234</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center flex-shrink-0">
-                    <Mail size={18} className="text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-white text-base">Email Address</h4>
-                    <p>hello@minddhara.com</p>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-300 max-w-6xl mx-auto">
-            <p>&copy; 2026 MindDhara Pvt Ltd | All Rights Reserved</p>
-            <div className="mt-4 md:mt-0 flex gap-2">
-              <img src="https://royalblue-seahorse-189824.hostingersite.com/wp-content/themes/woodmart/images/payments.png" alt="Payments" className="h-6 opacity-80" />
-            </div>
-          </div>
-          
-          {/* Scroll to Top Button */}
-          <button 
-            onClick={scrollToTop}
-            className="absolute right-6 bottom-6 bg-[#FDFAEE] text-black p-3 rounded-full shadow-[0_4px_14px_rgba(0,0,0,0.25)] hover:scale-110 transition-transform duration-300 z-50"
-            aria-label="Scroll to top"
-          >
-            <ChevronUp size={24} />
-          </button>
-
-        </div>
-      </footer>
 
     </div>
   );

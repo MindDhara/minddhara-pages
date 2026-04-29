@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FDFAEE; /* Matching your MindDhara theme */
+  --foreground: #1A411D;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  
+  /* Map Lato to sans and Prata to serif */
+  --font-sans: var(--font-lato);
+  --font-serif: var(--font-prata);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +24,4 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
